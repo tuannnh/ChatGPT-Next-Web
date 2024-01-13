@@ -1,13 +1,16 @@
-version: "3.9"
+version: '3'
+
 services:
   chatgpt-next-web:
-    profiles: [ "no-proxy" ]
     container_name: chatgpt-next-web
     restart: unless-stopped
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "5000:5000"
+      - ${PORT}:${PORT}
     environment:
+      - PORT=$PORT
       - OPENAI_API_KEY=$OPENAI_API_KEY
       - GOOGLE_API_KEY=$GOOGLE_API_KEY
       - CODE=$CODE
@@ -17,4 +20,3 @@ services:
       - DISABLE_GPT4=$DISABLE_GPT4
       - ENABLE_BALANCE_QUERY=$ENABLE_BALANCE_QUERY
       - DISABLE_FAST_LINK=$DISABLE_FAST_LINK
-      - OPENAI_SB=$OPENAI_SB

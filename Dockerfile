@@ -15,9 +15,7 @@ FROM base AS builder
 
 RUN apk update && apk add --no-cache git
 
-ENV OPENAI_API_KEY="ghu_RBGqaQcNCJhYZvkZJ2Q5BsMFnRspJj1uN1o2"
-ENV GOOGLE_API_KEY="AIzaSyCVTAMI3LBajeoXDns4VUqFej8-TCa6Voc"
-ENV CODE="0112358"
+ENV DOTENV_KEY="dotenv://:key_7995d65bd522b4c03b2d44f0b3ab50fc10af05c11f7ab5fc5296520ddcbf43d4@dotenv.org/vault/.env.vault?environment=development"
 
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
@@ -40,7 +38,7 @@ COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/.next/server ./.next/server
 
-EXPOSE 5000
+EXPOSE ${PORT}
 
 CMD node server.js
 

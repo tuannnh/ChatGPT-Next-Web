@@ -6,3 +6,7 @@
 
 *.key
 *.key.pub
+.env*
+.flaskenv*
+!.env.project
+!.env.vault
